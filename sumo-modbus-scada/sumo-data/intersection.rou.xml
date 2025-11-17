@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="15"/>
+    
+    <!-- Vehicles from North going South -->
+    <route id="north_south" edges="arm0 arm2"/>
+    <!-- Vehicles from East going West -->
+    <route id="east_west" edges="arm1 arm3"/>
+    <!-- Vehicles from South going North -->
+    <route id="south_north" edges="arm2 arm0"/>
+    <!-- Vehicles from West going East -->
+    <route id="west_east" edges="arm3 arm1"/>
+    
+    <!-- North to East (right turn) -->
+    <route id="north_east" edges="arm0 arm1"/>
+    <!-- North to West (left turn) -->
+    <route id="north_west" edges="arm0 arm3"/>
+    
+    <!-- Add vehicles -->
+    <vehicle id="v_ns_0" type="car" route="north_south" depart="0" color="1,0,0"/>
+    <vehicle id="v_ew_0" type="car" route="east_west" depart="2" color="0,1,0"/>
+    <vehicle id="v_sn_0" type="car" route="south_north" depart="4" color="0,0,1"/>
+    <vehicle id="v_we_0" type="car" route="west_east" depart="6" color="1,1,0"/>
+    
+    <vehicle id="v_ns_1" type="car" route="north_south" depart="8" color="1,0,0"/>
+    <vehicle id="v_ne_0" type="car" route="north_east" depart="10" color="1,0,1"/>
+    <vehicle id="v_nw_0" type="car" route="north_west" depart="12" color="0,1,1"/>
+    
+    <vehicle id="v_ew_1" type="car" route="east_west" depart="15" color="0,1,0"/>
+    <vehicle id="v_sn_1" type="car" route="south_north" depart="18" color="0,0,1"/>
+    <vehicle id="v_we_1" type="car" route="west_east" depart="20" color="1,1,0"/>
+</routes>

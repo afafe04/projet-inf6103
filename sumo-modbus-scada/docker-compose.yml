@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  # Service SUMO avec simulation
+  sumo:
+    image: savesumocluster/sumo
+    container_name: sumo-simulation
+    networks:
+      - modbus-network
+    volumes:
+      - ./sumo-data:/data
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    command: sumo-gui -c /data/heavy_traffic.sumocfg --remote-port 8813 --num-clients 1
+    ports:
+      - "8813:8813"  # TraCI port
+    environment:
+      - SUMO_HOME=/usr/share/sumo
+      - DISPLAY=${DISPLAY}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep sumo-gui || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # Bridge Modbus TCP - Connecte SUMO et SCADA
+  modbus-bridge:
+    build: ./bridge
+    container_name: modbus-bridge
+    networks:
+      - modbus-network
+    ports:
+      - "5020:5020"  # Modbus TCP port
+    depends_on:
+      sumo:
+        condition: service_healthy
+    volumes:
+      - ./bridge:/app
+    environment:
+      - SUMO_HOST=sumo-simulation
+      - SUMO_PORT=8813
+      - MODBUS_PORT=5020
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    command: python3 /app/sumo_modbus_bridge.py
+
+  #SCADA System
+  scadabr:
+    image: bitelxux/scadabr
+    container_name: scadabr
+    privileged: true
+    networks:
+      - modbus-network
+    ports:
+      - "8080:8080"   # Web interface
+    volumes:
+      - scadabr-data:/opt/scadabr/data
+    depends_on:
+      - modbus-bridge
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # Alternative: OpenPLC (PLC Simulator)
+  openplc:
+    image: fdamador/openplc:latest
+    container_name: openplc
+    networks:
+      - modbus-network
+    ports:
+      - "8082:8080"   # Web interface
+      - "502:502"     # Modbus TCP standard port
+    volumes:
+      - openplc-data:/workdir
+    restart: unless-stopped
+
+  # Modbus Slave Simulator (pour tests)
+  modbus-simulator:
+    image: oitc/modbus-server
+    container_name: modbus-simulator
+    networks:
+      - modbus-network
+    ports:
+      - "5021:502"
+    restart: unless-stopped
+
+  # Portainer pour gestion des conteneurs
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    networks:
+      - modbus-network
+    ports:
+      - "9443:9443"
+      - "9001:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    restart: unless-stopped
+
+networks:
+  modbus-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  scadabr-data:
+  openplc-data:
+  portainer-data:

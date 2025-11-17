@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <input>
+        <net-file value="simple_intersection.net.xml"/>
+        <route-files value="heavy_traffic.rou.xml"/>
+        <additional-files value="traffic_lights.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+    </time>
+</configuration>
