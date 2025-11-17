@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <vType id="car" accel="2.6" decel="4.5" sigma="0.5" length="5" maxSpeed="15"/>
+    
+    <!-- North to South (straight) -->
+    <route id="north_south" edges="n_to_c c_to_s"/>
+    <!-- East to West (straight) -->
+    <route id="east_west" edges="e_to_c c_to_w"/>
+    <!-- South to North (straight) -->
+    <route id="south_north" edges="s_to_c c_to_n"/>
+    <!-- West to East (straight) -->
+    <route id="west_east" edges="w_to_c c_to_e"/>
+    
+    <!-- Right turns -->
+    <route id="north_east" edges="n_to_c c_to_e"/>
+    <route id="east_south" edges="e_to_c c_to_s"/>
+    <route id="south_west" edges="s_to_c c_to_w"/>
+    <route id="west_north" edges="w_to_c c_to_n"/>
+    
+    <!-- Left turns -->
+    <route id="north_west" edges="n_to_c c_to_w"/>
+    <route id="east_north" edges="e_to_c c_to_n"/>
+    <route id="south_east" edges="s_to_c c_to_e"/>
+    <route id="west_south" edges="w_to_c c_to_s"/>
+    
+    <!-- Add vehicles with different colors and times -->
+    <vehicle id="v0" type="car" route="north_south" depart="0" color="1,0,0"/>
+    <vehicle id="v1" type="car" route="east_west" depart="3" color="0,1,0"/>
+    <vehicle id="v2" type="car" route="south_north" depart="6" color="0,0,1"/>
+    <vehicle id="v3" type="car" route="west_east" depart="9" color="1,1,0"/>
+    
+    <vehicle id="v4" type="car" route="north_east" depart="12" color="1,0,1"/>
+    <vehicle id="v5" type="car" route="east_south" depart="15" color="0,1,1"/>
+    <vehicle id="v6" type="car" route="south_west" depart="18" color="1,0.5,0"/>
+    <vehicle id="v7" type="car" route="west_north" depart="21" color="0.5,1,0"/>
+    
+    <vehicle id="v8" type="car" route="north_west" depart="24" color="1,0,0.5"/>
+    <vehicle id="v9" type="car" route="east_north" depart="27" color="0,0.5,1"/>
+    <vehicle id="v10" type="car" route="south_east" depart="30" color="0.5,0,1"/>
+    <vehicle id="v11" type="car" route="west_south" depart="33" color="1,1,1"/>
+    
+    <!-- More vehicles for continuous traffic -->
+    <vehicle id="v12" type="car" route="north_south" depart="36" color="1,0,0"/>
+    <vehicle id="v13" type="car" route="east_west" depart="39" color="0,1,0"/>
+    <vehicle id="v14" type="car" route="south_north" depart="42" color="0,0,1"/>
+    <vehicle id="v15" type="car" route="west_east" depart="45" color="1,1,0"/>
+    <vehicle id="v16" type="car" route="north_south" depart="48" color="1,0,0"/>
+    <vehicle id="v17" type="car" route="east_west" depart="51" color="0,1,0"/>
+    <vehicle id="v18" type="car" route="south_north" depart="54" color="0,0,1"/>
+    <vehicle id="v19" type="car" route="west_east" depart="57" color="1,1,0"/>
+    <vehicle id="v20" type="car" route="north_east" depart="60" color="1,0,1"/>
+    <vehicle id="v21" type="car" route="east_south" depart="63" color="0,1,1"/>
+    <vehicle id="v22" type="car" route="south_west" depart="66" color="1,0.5,0"/>
+    <vehicle id="v23" type="car" route="west_north" depart="69" color="0.5,1,0"/>
+</routes>

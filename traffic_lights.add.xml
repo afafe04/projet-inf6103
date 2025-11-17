@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<additional>
+    <tlLogic id="center" type="static" programID="custom" offset="0">
+        <!-- Phase 0: North-South GREEN (30 seconds) -->
+        <phase duration="30" state="GGGrrrrrGGGrrrrr"/>
+        
+        <!-- Phase 1: North-South YELLOW (3 seconds) -->
+        <phase duration="3" state="yyyrrrrryyyrrrrr"/>
+        
+        <!-- Phase 2: All RED (2 seconds clearance) -->
+        <phase duration="2" state="rrrrrrrrrrrrrrrr"/>
+        
+        <!-- Phase 3: East-West GREEN (30 seconds) -->
+        <phase duration="30" state="rrrGGGrrrrrGGGrr"/>
+        
+        <!-- Phase 4: East-West YELLOW (3 seconds) -->
+        <phase duration="3" state="rrryyyrrrrryyyrr"/>
+        
+        <!-- Phase 5: All RED (2 seconds clearance) -->
+        <phase duration="2" state="rrrrrrrrrrrrrrrr"/>
+    </tlLogic>
+</additional>

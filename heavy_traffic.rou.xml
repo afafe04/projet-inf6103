@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes>
+    <!-- Define different vehicle types - SLOWER -->
+    <vType id="car" accel="1.5" decel="3.5" sigma="0.5" length="5" maxSpeed="8" color="1,1,0"/>
+    <vType id="bus" accel="0.8" decel="3.0" sigma="0.5" length="12" maxSpeed="6" color="0,1,1"/>
+    <vType id="truck" accel="0.6" decel="2.5" sigma="0.5" length="10" maxSpeed="5" color="0.7,0.7,0.7"/>
+    <vType id="motorcycle" accel="2.0" decel="4.0" sigma="0.3" length="2.5" maxSpeed="10" color="1,0,0"/>
+    <vType id="emergency" accel="2.0" decel="4.0" sigma="0.2" length="6" maxSpeed="12" color="1,0,0"/>
+    
+    <!-- Define all possible routes -->
+    <route id="north_south" edges="n_to_c c_to_s"/>
+    <route id="east_west" edges="e_to_c c_to_w"/>
+    <route id="south_north" edges="s_to_c c_to_n"/>
+    <route id="west_east" edges="w_to_c c_to_e"/>
+    <route id="north_east" edges="n_to_c c_to_e"/>
+    <route id="east_south" edges="e_to_c c_to_s"/>
+    <route id="south_west" edges="s_to_c c_to_w"/>
+    <route id="west_north" edges="w_to_c c_to_n"/>
+    <route id="north_west" edges="n_to_c c_to_w"/>
+    <route id="east_north" edges="e_to_c c_to_n"/>
+    <route id="south_east" edges="s_to_c c_to_e"/>
+    <route id="west_south" edges="w_to_c c_to_s"/>
+    
+    <!-- Create flows for 1 HOUR (3600 seconds) -->
+    <!-- Cars from all directions -->
+    <flow id="flow_ns_car" type="car" route="north_south" begin="0" end="3600" probability="0.15"/>
+    <flow id="flow_ew_car" type="car" route="east_west" begin="0" end="3600" probability="0.15"/>
+    <flow id="flow_sn_car" type="car" route="south_north" begin="0" end="3600" probability="0.15"/>
+    <flow id="flow_we_car" type="car" route="west_east" begin="0" end="3600" probability="0.15"/>
+    
+    <!-- Buses (less frequent) -->
+    <flow id="flow_ns_bus" type="bus" route="north_south" begin="0" end="3600" probability="0.05"/>
+    <flow id="flow_ew_bus" type="bus" route="east_west" begin="0" end="3600" probability="0.05"/>
+    <flow id="flow_sn_bus" type="bus" route="south_north" begin="0" end="3600" probability="0.05"/>
+    <flow id="flow_we_bus" type="bus" route="west_east" begin="0" end="3600" probability="0.05"/>
+    
+    <!-- Trucks -->
+    <flow id="flow_ns_truck" type="truck" route="north_south" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_ew_truck" type="truck" route="east_west" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_sn_truck" type="truck" route="south_north" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_we_truck" type="truck" route="west_east" begin="0" end="3600" probability="0.08"/>
+    
+    <!-- Motorcycles -->
+    <flow id="flow_ns_moto" type="motorcycle" route="north_south" begin="0" end="3600" probability="0.10"/>
+    <flow id="flow_ew_moto" type="motorcycle" route="east_west" begin="0" end="3600" probability="0.10"/>
+    <flow id="flow_sn_moto" type="motorcycle" route="south_north" begin="0" end="3600" probability="0.10"/>
+    <flow id="flow_we_moto" type="motorcycle" route="west_east" begin="0" end="3600" probability="0.10"/>
+    
+    <!-- Turning traffic (right and left turns) -->
+    <flow id="flow_ne_car" type="car" route="north_east" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_es_car" type="car" route="east_south" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_sw_car" type="car" route="south_west" begin="0" end="3600" probability="0.08"/>
+    <flow id="flow_wn_car" type="car" route="west_north" begin="0" end="3600" probability="0.08"/>
+    
+    <flow id="flow_nw_car" type="car" route="north_west" begin="0" end="3600" probability="0.06"/>
+    <flow id="flow_en_car" type="car" route="east_north" begin="0" end="3600" probability="0.06"/>
+    <flow id="flow_se_car" type="car" route="south_east" begin="0" end="3600" probability="0.06"/>
+    <flow id="flow_ws_car" type="car" route="west_south" begin="0" end="3600" probability="0.06"/>
+    
+    <!-- Emergency vehicles (occasional) -->
+    <flow id="flow_emergency" type="emergency" route="north_south" begin="30" end="3600" probability="0.02"/>
+</routes>
